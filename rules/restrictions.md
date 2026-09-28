@@ -23,10 +23,12 @@ alwaysApply: true
 - Não gere scaffold automático de framework sem mostrar antes o que ele
   vai criar. Os diretórios `backend/` e `frontend/` ainda não têm projeto
   algum — o primeiro scaffold é uma decisão visível, não um efeito colateral.
-- Não escreva código de funcionalidade sem uma spec correspondente que a
-  defina: `docs/PRD.md` para comportamento de produto, `docs/layout.md`
-  para comportamento visual. Não há pasta docs/specs/ — se a funcionalidade
-  não está em nenhum dos dois, pergunte.
+- Não escreva código de funcionalidade sem a spec da fatia: toda
+  funcionalidade tem `docs/specs/<NNN-nome-curto>/` com `spec.md`,
+  `plan.md` e `tasks.md` (`rules/spec-flow.md` explica o ciclo). O PRD
+  (comportamento de produto) e o `docs/layout.md` (comportamento visual)
+  são a fonte da spec, não a spec — se a funcionalidade não estiver em
+  nenhum dos três, pergunte, não deduza.
 
 ## Ritmo
 
@@ -51,8 +53,9 @@ alwaysApply: true
 ## Precedência
 
 - Se o código e uma spec discordarem sobre comportamento, a spec está
-  certa até que alguém mude a spec (spec = PRD ou layout.md, conforme
-  o tipo de comportamento).
+  certa até que alguém mude a spec. A spec é a da fatia, em
+  `docs/specs/<NNN-nome-curto>/spec.md`, que por sua vez deriva do PRD ou
+  do layout.md conforme o tipo de comportamento.
 - Se uma regra de procedimento contrariar um ADR ou uma spec, PARE e
   avise. Não escolha um dos dois por conta própria.
 - "Pode ir" e "pode implementar" não revogam nada deste arquivo — nem as

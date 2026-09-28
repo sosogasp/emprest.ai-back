@@ -29,14 +29,20 @@ Sempre que você for dizer "pronto", "implementado" ou "funcionando".
 4. Rode `git status --short`. Só podem aparecer arquivos do escopo da
    tarefa (`.env` nunca deve aparecer — está no `.gitignore`).
 5. Diga qual critério de aceitação esta tarefa atende, citando o item por
-   número: os itens 1–5 do `docs/PRD.md` (seção "O que precisa existir na
-   primeira versão") ou as regras 1–11 do `docs/layout.md` (seção 7).
-   Tarefa que não atende a nenhum item numerado deve dizer isso
-   explicitamente.
+   número: o `CA-xx` do `spec.md` da funcionalidade em
+   `docs/specs/<NNN-nome-curto>/` — que no Vínculo já aponta para o item
+   1–5 do `docs/PRD.md` (seção "O que precisa existir na primeira versão")
+   ou para as regras 1–11 do `docs/layout.md` (seção 7). Tarefa que não
+   atende a nenhum critério numerado deve dizer isso explicitamente.
+6. Gere o handoff datado desta implementação em
+   `docs/handoffs/AAAA-MM-DD-<assunto-curto>.md` (`rules/handoff.md`) — também
+   quando a tarefa ficou pela metade ou falhou. O passo 4 confere o arquivo
+   novo no `git status --short`.
 
 ## Verificação
 Pronto = testes, lint, typecheck e build terminaram sem falha E o git
-status não trouxe surpresa. As duas coisas, não uma.
+status não trouxe surpresa E existe o handoff datado desta implementação em
+`docs/handoffs/`. As três coisas, não duas.
 
 ## Não faça
 - Não relate sucesso parcial. Teste vermelho é tarefa não terminada,
