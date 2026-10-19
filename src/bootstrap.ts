@@ -4,8 +4,10 @@ import { cleanupOpenApiDoc, ZodValidationPipe } from 'nestjs-zod'
 import { z } from 'zod'
 import { AppModule } from './app.module'
 import { Problemas } from './problemas'
+import { configurarConexoes } from './conexao'
 
 export async function criarApp() {
+  configurarConexoes()
   z.object({ SUPABASE_URL: z.url(), DATABASE_URL: z.string().min(1) }).parse(process.env)
   const app = await NestFactory.create(AppModule, { logger: false })
   app.setGlobalPrefix('v1')
