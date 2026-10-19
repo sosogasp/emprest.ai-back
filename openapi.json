@@ -1,0 +1,629 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/v1/me": {
+      "get": {
+        "operationId": "getPerfil",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PerfilDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "",
+        "tags": [
+          "Catalogo"
+        ]
+      }
+    },
+    "/v1/equipamentos": {
+      "get": {
+        "operationId": "getEquipamentos",
+        "parameters": [
+          {
+            "name": "cursor",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EquipamentosDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "",
+        "tags": [
+          "Catalogo"
+        ]
+      },
+      "post": {
+        "operationId": "postEquipamento",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CriarEquipamentoDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EquipamentoDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "",
+        "tags": [
+          "Catalogo"
+        ]
+      }
+    },
+    "/v1/emprestimos": {
+      "get": {
+        "operationId": "getEmprestimos",
+        "parameters": [
+          {
+            "name": "cursor",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "format": "uuid",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmprestimosDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "",
+        "tags": [
+          "Catalogo"
+        ]
+      },
+      "post": {
+        "operationId": "postEmprestimo",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SolicitarDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmprestimoDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "",
+        "tags": [
+          "Catalogo"
+        ]
+      }
+    },
+    "/v1/emprestimos/{id}/devolucao": {
+      "post": {
+        "operationId": "postDevolucao",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmprestimoDto"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ],
+        "summary": "",
+        "tags": [
+          "Catalogo"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "EMPREST.AI",
+    "description": "",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "securitySchemes": {
+      "bearer": {
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "type": "http"
+      }
+    },
+    "schemas": {
+      "PerfilDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "iniciais": {
+            "type": "string"
+          },
+          "papel": {
+            "type": "string",
+            "enum": [
+              "Colaborador",
+              "Operações"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "nome",
+          "iniciais",
+          "papel"
+        ]
+      },
+      "EquipamentosDto": {
+        "type": "object",
+        "properties": {
+          "itens": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "nome": {
+                  "type": "string"
+                },
+                "categoria": {
+                  "type": "string",
+                  "enum": [
+                    "Notebook",
+                    "Monitor",
+                    "Cabo",
+                    "Câmera",
+                    "Acessório"
+                  ]
+                },
+                "patrimonio": {
+                  "type": "string"
+                },
+                "manutencao": {
+                  "type": "boolean"
+                },
+                "observacao": {
+                  "type": "string",
+                  "nullable": true
+                },
+                "emprestimo": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "equipamentoId": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "pessoaId": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "retirada": {
+                      "type": "string"
+                    },
+                    "prazo": {
+                      "type": "string"
+                    },
+                    "pessoa": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "nome": {
+                          "type": "string"
+                        },
+                        "iniciais": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "nome",
+                        "iniciais"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "equipamentoId",
+                    "pessoaId",
+                    "retirada",
+                    "prazo",
+                    "pessoa"
+                  ],
+                  "nullable": true
+                }
+              },
+              "required": [
+                "id",
+                "nome",
+                "categoria",
+                "patrimonio",
+                "manutencao",
+                "observacao",
+                "emprestimo"
+              ]
+            }
+          },
+          "proximoCursor": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "itens",
+          "proximoCursor"
+        ]
+      },
+      "EmprestimosDto": {
+        "type": "object",
+        "properties": {
+          "itens": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "equipamentoId": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "pessoaId": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "retirada": {
+                  "type": "string"
+                },
+                "prazo": {
+                  "type": "string"
+                },
+                "pessoa": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "nome": {
+                      "type": "string"
+                    },
+                    "iniciais": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "nome",
+                    "iniciais"
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "equipamentoId",
+                "pessoaId",
+                "retirada",
+                "prazo",
+                "pessoa"
+              ]
+            }
+          },
+          "proximoCursor": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "itens",
+          "proximoCursor"
+        ]
+      },
+      "CriarEquipamentoDto": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 150
+          },
+          "categoria": {
+            "type": "string",
+            "enum": [
+              "Notebook",
+              "Monitor",
+              "Cabo",
+              "Câmera",
+              "Acessório"
+            ]
+          },
+          "patrimonio": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "manutencao": {
+            "type": "boolean",
+            "default": false
+          },
+          "observacao": {
+            "type": "string",
+            "maxLength": 500
+          }
+        },
+        "required": [
+          "nome",
+          "categoria",
+          "patrimonio"
+        ]
+      },
+      "EquipamentoDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "nome": {
+            "type": "string"
+          },
+          "categoria": {
+            "type": "string",
+            "enum": [
+              "Notebook",
+              "Monitor",
+              "Cabo",
+              "Câmera",
+              "Acessório"
+            ]
+          },
+          "patrimonio": {
+            "type": "string"
+          },
+          "manutencao": {
+            "type": "boolean"
+          },
+          "observacao": {
+            "type": "string",
+            "nullable": true
+          },
+          "emprestimo": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "equipamentoId": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "pessoaId": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "retirada": {
+                "type": "string"
+              },
+              "prazo": {
+                "type": "string"
+              },
+              "pessoa": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "format": "uuid"
+                  },
+                  "nome": {
+                    "type": "string"
+                  },
+                  "iniciais": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "nome",
+                  "iniciais"
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "equipamentoId",
+              "pessoaId",
+              "retirada",
+              "prazo",
+              "pessoa"
+            ],
+            "nullable": true
+          }
+        },
+        "required": [
+          "id",
+          "nome",
+          "categoria",
+          "patrimonio",
+          "manutencao",
+          "observacao",
+          "emprestimo"
+        ]
+      },
+      "SolicitarDto": {
+        "type": "object",
+        "properties": {
+          "equipamentoId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "required": [
+          "equipamentoId"
+        ]
+      },
+      "EmprestimoDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "equipamentoId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "pessoaId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "retirada": {
+            "type": "string"
+          },
+          "prazo": {
+            "type": "string"
+          },
+          "pessoa": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "nome": {
+                "type": "string"
+              },
+              "iniciais": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "nome",
+              "iniciais"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "equipamentoId",
+          "pessoaId",
+          "retirada",
+          "prazo",
+          "pessoa"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "buildCommand": "npm run prisma:generate && npm run prisma:migrate:deploy && npm run seed && node scripts/provisionar.cjs && npm run build",
+  "functions": { "api/index.ts": { "maxDuration": 60 } },
+  "rewrites": [{ "source": "/v1/:path*", "destination": "/api/index" }]
+}
