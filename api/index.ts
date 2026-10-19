@@ -1,7 +1,7 @@
 import 'reflect-metadata'
 import type { IncomingMessage, ServerResponse } from 'node:http'
 import configure from '@vendia/serverless-express'
-import { criarApp } from '../src/bootstrap'
+import { criarApp } from '../dist/bootstrap'
 import { z } from 'zod'
 
 interface Evento { method: string; path: string; headers: IncomingMessage['headers']; body: Buffer; remoteAddress?: string }
@@ -34,7 +34,9 @@ export default async function handler(req: IncomingMessage & { body?: unknown },
     res.statusCode = response.statusCode
     for (const [key, value] of Object.entries(response.headers)) if (key.toLowerCase() !== 'transfer-encoding') res.setHeader(key, value)
     res.end(Buffer.from(response.body, response.isBase64Encoded ? 'base64' : 'utf8'))
-  } catch {
+  } catch (error) {
+    if (error instanceof z.ZodError) console.error('Resposta inválida no adaptador', error.issues.map((issue) => ({ path: issue.path, code: issue.code })))
+    else console.error('Falha ao iniciar API', error instanceof Error ? error.name : 'Erro desconhecido')
     res.statusCode = 503
     res.setHeader('Content-Type', 'application/problem+json')
     res.end(JSON.stringify({ type: 'about:blank', title: 'Serviço indisponível', status: 503, detail: 'Tente novamente em instantes.' }))
