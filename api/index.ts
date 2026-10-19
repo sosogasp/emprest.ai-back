@@ -36,7 +36,7 @@ export default async function handler(req: IncomingMessage & { body?: unknown },
     res.end(Buffer.from(response.body, response.isBase64Encoded ? 'base64' : 'utf8'))
   } catch (error) {
     if (error instanceof z.ZodError) console.error('Resposta inválida no adaptador', error.issues.map((issue) => ({ path: issue.path, code: issue.code })))
-    else console.error('Falha ao iniciar API', error instanceof Error ? error.name : 'Erro desconhecido')
+    else console.error('Falha ao iniciar API', error instanceof Error ? error.name : 'Erro desconhecido', error instanceof TypeError ? error.message.replace(/(?:postgres(?:ql)?|https?):\/\/\S+/g, '[URL]') : '')
     res.statusCode = 503
     res.setHeader('Content-Type', 'application/problem+json')
     res.end(JSON.stringify({ type: 'about:blank', title: 'Serviço indisponível', status: 503, detail: 'Tente novamente em instantes.' }))
