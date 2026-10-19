@@ -30,7 +30,7 @@ export default async function handler(req: IncomingMessage & { body?: unknown },
     const chunks: Buffer[] = []
     if (req.body !== undefined) chunks.push(Buffer.from(typeof req.body === 'string' ? req.body : JSON.stringify(req.body)))
     else for await (const chunk of req) chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk))
-    const response = respostaSchema.parse(await app({ method: req.method ?? 'GET', path: req.url ?? '/', headers: req.headers, body: Buffer.concat(chunks), remoteAddress: req.socket.remoteAddress }, { callbackWaitsForEmptyEventLoop: false, functionName: 'emprest-ai-back', functionVersion: '1', invokedFunctionArn: '', memoryLimitInMB: '1024', awsRequestId: '', logGroupName: '', logStreamName: '', getRemainingTimeInMillis: () => 60000, done: () => undefined, fail: () => undefined, succeed: () => undefined }, () => undefined))
+    const response = respostaSchema.parse(await app({ method: req.method ?? 'GET', path: req.url ?? '/', headers: req.headers, body: Buffer.concat(chunks), remoteAddress: req.socket?.remoteAddress ?? '' }, { callbackWaitsForEmptyEventLoop: false, functionName: 'emprest-ai-back', functionVersion: '1', invokedFunctionArn: '', memoryLimitInMB: '1024', awsRequestId: '', logGroupName: '', logStreamName: '', getRemainingTimeInMillis: () => 60000, done: () => undefined, fail: () => undefined, succeed: () => undefined }, () => undefined))
     res.statusCode = response.statusCode
     for (const [key, value] of Object.entries(response.headers)) if (key.toLowerCase() !== 'transfer-encoding') res.setHeader(key, value)
     res.end(Buffer.from(response.body, response.isBase64Encoded ? 'base64' : 'utf8'))
