@@ -1,0 +1,111 @@
+// Esquema de dados do EMPREST.AI.
+// Multi-tenancy por coluna (ADR-001 §6): tenant_id em toda tabela de domínio.
+// RLS/policies entram na migration em SQL bruto (ADR-001 §5), não neste arquivo.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_DATABASE_URL")
+}
+
+/// Papel dentro de um tenant (PRD "Quem usa").
+enum Papel {
+  COLABORADOR
+  OPERACOES
+}
+
+/// Categoria de equipamento (docs/layout.md §9).
+enum Categoria {
+  NOTEBOOK
+  MONITOR
+  CABO
+  CAMERA
+  ACESSORIO
+}
+
+/// Empréstimo aberto ou já devolvido.
+enum StatusEmprestimo {
+  ABERTO
+  DEVOLVIDO
+}
+
+model Tenant {
+  id       String   @id @default(uuid()) @db.Uuid
+  slug     String   @unique
+  nome     String
+  criadoEm DateTime @default(now()) @map("criado_em")
+
+  membros      Membro[]
+  equipamentos Equipamento[]
+  emprestimos  Emprestimo[]
+
+  @@map("tenants")
+}
+
+/// Perfil do usuário. O id é o auth.users.id do Supabase Auth (ADR-001 §7).
+model Usuario {
+  id       String   @id @db.Uuid
+  nome     String
+  email    String?  @unique
+  criadoEm DateTime @default(now()) @map("criado_em")
+
+  membros     Membro[]
+  emprestimos Emprestimo[]
+
+  @@map("usuarios")
+}
+
+/// Vínculo usuário–tenant com papel (ADR-001 §6).
+model Membro {
+  id        String   @id @default(uuid()) @db.Uuid
+  tenantId  String   @map("tenant_id") @db.Uuid
+  usuarioId String   @map("usuario_id") @db.Uuid
+  papel     Papel
+  criadoEm  DateTime @default(now()) @map("criado_em")
+
+  tenant  Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  usuario Usuario @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
+
+  @@unique([usuarioId, tenantId])
+  @@map("membros")
+}
+
+model Equipamento {
+  id           String    @id @default(uuid()) @db.Uuid
+  tenantId     String    @map("tenant_id") @db.Uuid
+  nome         String
+  categoria    Categoria
+  patrimonio   String
+  manutencao   Boolean   @default(false)
+  observacao   String?
+  criadoEm     DateTime  @default(now()) @map("criado_em")
+  atualizadoEm DateTime  @updatedAt @map("atualizado_em")
+
+  tenant      Tenant       @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  emprestimos Emprestimo[]
+
+  @@unique([tenantId, patrimonio])
+  @@map("equipamentos")
+}
+
+model Emprestimo {
+  id            String           @id @default(uuid()) @db.Uuid
+  tenantId      String           @map("tenant_id") @db.Uuid
+  equipamentoId String           @map("equipamento_id") @db.Uuid
+  usuarioId     String           @map("usuario_id") @db.Uuid
+  retirada      DateTime         @db.Date
+  prazo         DateTime         @db.Date
+  status        StatusEmprestimo @default(ABERTO)
+  devolvidoEm   DateTime?        @map("devolvido_em")
+  criadoEm      DateTime         @default(now()) @map("criado_em")
+
+  tenant      Tenant      @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  equipamento Equipamento @relation(fields: [equipamentoId], references: [id])
+  usuario     Usuario     @relation(fields: [usuarioId], references: [id])
+
+  @@map("emprestimos")
+}

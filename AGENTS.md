@@ -60,7 +60,8 @@ docs/       # PRD, ADRs e layout
 
 ## Fluxo de trabalho
 
-- Commit direto na branch principal, sem PR.
+- Uma branch por spec (`spec/<NNN-nome-curto>`); integrar na `main` por merge
+  após os checks, conforme `rules/spec-flow.md`.
 - Uma tarefa = um conjunto coeso de mudanças nos dois repositórios quando
   tocar os dois lados.
 

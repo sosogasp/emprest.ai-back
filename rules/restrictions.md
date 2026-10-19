@@ -21,8 +21,8 @@ alwaysApply: true
 - Não altere arquivo fora do escopo da tarefa atual (o `git status --short`
   do checks.md é quem confere isso).
 - Não gere scaffold automático de framework sem mostrar antes o que ele
-  vai criar. Os diretórios `backend/` e `frontend/` ainda não têm projeto
-  algum — o primeiro scaffold é uma decisão visível, não um efeito colateral.
+  vai criar. O `frontend/` já tem projeto (scaffold de `4abc059`) e o
+  `backend/` ainda não tem — o scaffold restante é uma decisão visível, não um efeito colateral.
 - Não escreva código de funcionalidade sem a spec da fatia: toda
   funcionalidade tem `docs/specs/<NNN-nome-curto>/` com `spec.md`,
   `plan.md` e `tasks.md` (`rules/spec-flow.md` explica o ciclo). O PRD
@@ -40,15 +40,16 @@ alwaysApply: true
 
 ## Produção
 
-- O fluxo deste projeto é commit e push direto na main, autorizado em
-  AGENTS.md. Push na main dispara deploy na Vercel — então só dê push
+- O fluxo deste projeto é commit na branch de cada spec e merge na main,
+  conforme `rules/spec-flow.md`. O push da main é autorizado em
+  `rules/operacao.md` e dispara deploy na Vercel — então só dê push
   com os checks do rules/checks.md passando.
 - Não rode deploy manual nem altere configuração da Vercel.
 - Não toque no projeto Supabase remoto: nada de SQL, de alteração de
   schema ou de dado por lá. Tudo acontece no banco local (inclusive o
   reset de migrations do checks.md).
-- Não mexa em `.env`: eles estão no `.gitignore` e contêm segredo
-  (`SUPABASE_SERVICE_ROLE_KEY`).
+- Mexer em `.env` ou em config de deploy exige pedir antes (`rules/operacao.md`):
+  eles estão no `.gitignore` e contêm segredo (`SUPABASE_SERVICE_ROLE_KEY`) — nenhum valor vai para commit, log ou resposta.
 
 ## Precedência
 

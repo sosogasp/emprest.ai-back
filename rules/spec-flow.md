@@ -20,6 +20,14 @@ workspace) não é commitada em lugar nenhum e o `git status` do checks.md
 não a vê.
 
 ## Procedimento
+0. **Uma branch por spec.** Antes de implementar, crie ou retome a branch
+   `spec/<NNN-nome-curto>` a partir da `main` atualizada. Toda implementação,
+   teste e documentação da spec ficam nessa branch. Se a spec tocar os dois
+   repositórios, use a mesma branch nos dois. Só integre na `main` por merge,
+   depois de todos os checks passarem e o handoff estar registrado. Não commite
+   código da spec diretamente na `main`. Esta orientação substitui o fluxo
+   anterior de commit direto na principal; o push da `main` após o merge
+   continua sendo o caminho de deploy na Vercel.
 1. Crie `docs/specs/<NNN-nome-curto>/` — três dígitos, nome curto em
    kebab-case, na ordem do PRD (`001-login`, `002-catalogo`, ...). Sem
    pasta de spec fora desse padrão.
@@ -49,6 +57,8 @@ não a vê.
 ## Verificação
 Existem `spec.md`, `plan.md` e `tasks.md` na mesma pasta `NNN-nome-curto`, e
 nenhuma tarefa do `tasks.md` está sem `CA-xx`. Nenhum arquivo de código foi
+implementado diretamente na `main`: cada spec possui sua branch e chega à
+principal por merge após os checks. Nenhum arquivo de código foi
 criado antes de o `plan.md` existir. Funcionalidade entregue sem spec não é
 tarefa concluída — é dívida, e ela se registra na seção "Dívida de processo"
 da spec da fatia.

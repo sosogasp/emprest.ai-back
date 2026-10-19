@@ -9,8 +9,9 @@ alwaysApply: true
 ## Git
 > leitor: agente
 
-- Commit: O agente commita cada tarefa
-- Push: O agente pode fazer push em branch, nunca na produção
+- Commit: O agente commita cada tarefa na branch da spec (`rules/spec-flow.md`).
+- Push: o agente pode dar push direto na `main` (autorizado em `AGENTS.md`),
+  com os checks do `rules/checks.md` passando antes de publicar.
 - A mensagem de commit cita a tarefa e o critério de aceitação.
 - Um commit por tarefa. Nunca junte código e mudança de regra
   no mesmo commit.
