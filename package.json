@@ -15,7 +15,9 @@
     "prisma:migrate:status": "prisma migrate status",
     "seed": "ts-node prisma/seed.ts",
     "typecheck": "tsc -p tsconfig.api.json",
-    "openapi": "ts-node scripts/openapi.ts"
+    "openapi": "ts-node scripts/openapi.ts",
+    "pretest": "npm run build",
+    "pretypecheck": "npm run build"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
