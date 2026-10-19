@@ -1,4 +1,6 @@
 {
+  "framework": null,
+  "outputDirectory": "public",
   "buildCommand": "node scripts/deploy.cjs",
   "functions": { "api/index.ts": { "maxDuration": 60 } },
   "rewrites": [{ "source": "/v1/:path*", "destination": "/api/index" }]
