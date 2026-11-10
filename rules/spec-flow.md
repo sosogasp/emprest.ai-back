@@ -71,3 +71,7 @@ da spec da fatia.
   define, nem a de um comportamento sem citar o item do `docs/PRD.md`.
 - Não trate o PRD e o layout como a spec da fatia: eles são a fonte, não o
   recorte. A spec diz o que ESTA fatia faz e como sei que funcionou.
+
+## Verificação independente obrigatória
+Antes de declarar uma spec pronta, fechar suas tarefas finais ou integrar sua branch, invoque o agente Codex verificador-spec com contexto novo, a spec aprovada, os hashes das revisões de frontend e backend e evidências sanitizadas. Use uma sessão nova e somente leitura com agents/verificador-spec.md se o perfil não estiver disponível. Rode sem credenciais ou conectores de produção. Se não houver ambiente seguro, a spec continua pendente.
+Guarde a tabela no handoff. Se algum CA for reprovado ou ficar sem evidência, o agente principal resolve a pendência e solicita outra rodada. Uma mudança nas revisões exige nova verificação.
