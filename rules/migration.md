@@ -13,9 +13,9 @@ Qualquer tarefa que precise criar, alterar ou remover tabela, coluna,
 mudança parecer trivial.
 
 ## Procedimento
-1. Antes de gerar qualquer coisa: escreva na resposta o diff pretendido
-   no `schema.prisma` E o SQL de RLS pretendido, e PARE. Eu aprovo ou
-   corrijo.
+1. Descreva na resposta o diff pretendido no `schema.prisma` E o SQL de RLS
+   pretendido e siga — mudança de migration é "avisar depois" no contrato
+   de operação (`rules/operacao.md`); reporte o que fez na resposta.
 2. Gere a migration pelo Prisma com
    `npx prisma migrate dev --name <nome> --create-only` (gera o arquivo
    sem aplicar). Uma migration por tarefa. Nunca `prisma db push`.

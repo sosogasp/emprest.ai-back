@@ -14,7 +14,7 @@ Sempre que você for dizer "pronto", "implementado" ou "funcionando".
 1. Rode testes, lint e typecheck nos dois repositórios tocados pela tarefa
    (e nos dois, sempre que a mudança atravessar o contrato):
    - backend: `cd backend && npm run lint && npm run test`
-   - frontend: `cd frontend && npm run lint && npx tsc -b`
+   - frontend: `cd frontend && npm run lint && npx tsc -b && npm run test`
    Cole a última linha de cada saída na resposta.
    Se algum script ainda não existir no `package.json` recém-scaffoldado,
    declare isso em vez de pular em silêncio.

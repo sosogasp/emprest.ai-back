@@ -12,7 +12,7 @@ importação da planilha).
 ## Documentação
 
 - `docs/PRD.md` — escopo do produto e regras de negócio (limite de 3 itens
-  por pessoa, prazo padrão de 14 dias, bloqueio por atraso, manutenção não
+  por pessoa, prazo padrão de 14 dias úteis (segunda a sexta), bloqueio por atraso, manutenção não
   conta como disponível).
 - `docs/adr/001-stack.md` — decisões de stack. Não contradiga o ADR; se uma
   mudança exigir rever uma decisão, proponha antes.
@@ -41,7 +41,7 @@ e `frontend/rules/`. Leia a da pasta em que você está mexendo.
   escrever ou alterar qualquer arquivo de `src/`
 - `rules/checks.md` — execute antes de dizer que uma etapa terminou
 - `rules/tests.md` — leia antes de escrever ou mudar teste; a matriz é do
-  ADR-001 §8 e nenhum runner está instalado ainda
+  ADR-001 §8, com Jest, Vitest e Testcontainers instalados
 - `rules/handoff.md` — leia ao retomar e siga ao terminar qualquer
   implementação (handoff datado em `docs/handoffs/`)
 - `rules/migration.md` — leia antes de tocar em schema

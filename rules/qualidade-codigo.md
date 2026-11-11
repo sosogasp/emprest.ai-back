@@ -81,9 +81,7 @@ contradizer, decida pelo motivo único.
   `src/pages/` (chamar `estaAtrasado` pode; reimplementar a comparação não).
 
 ## Verificação
-- `npm run lint && npx tsc -b` sem falha (`rules/checks.md`). Quando a Tarefa 9
-  instalar o Vitest (ADR-001 §8), o mesmo passo passa a incluir
-  `npm run test`.
+- Rode lint, typecheck e os testes existentes sem falha, conforme rules/checks.md.
 - Busca, com o resultado colado na resposta: nenhum `fetch`, `axios` ou
   `supabase` fora de `src/lib/`; nenhum `any`, `as` ou `!` novo; nenhuma
   derivação de empréstimo duplicada em `src/pages/`.
