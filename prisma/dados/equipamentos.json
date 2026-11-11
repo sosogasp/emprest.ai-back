@@ -1,0 +1,86 @@
+[
+  {
+    "patrimonio": "TI-0001",
+    "nome": "Notebook 14 polegadas",
+    "categoria": "NOTEBOOK",
+    "manutencao": false,
+    "imagemUrl": "https://xcqsvcqjkogrchktrmgn.supabase.co/storage/v1/object/public/equipamentos/equipamentos/TI-0001.png"
+  },
+  {
+    "patrimonio": "TI-0002",
+    "nome": "Notebook 15 polegadas",
+    "categoria": "NOTEBOOK",
+    "manutencao": false,
+    "imagemUrl": "https://xcqsvcqjkogrchktrmgn.supabase.co/storage/v1/object/public/equipamentos/equipamentos/TI-0002.png"
+  },
+  {
+    "patrimonio": "TI-0003",
+    "nome": "Notebook 13 polegadas",
+    "categoria": "NOTEBOOK",
+    "manutencao": false,
+    "imagemUrl": "https://xcqsvcqjkogrchktrmgn.supabase.co/storage/v1/object/public/equipamentos/equipamentos/TI-0003.png"
+  },
+  {
+    "patrimonio": "TI-0004",
+    "nome": "Notebook 15 polegadas",
+    "categoria": "NOTEBOOK",
+    "manutencao": true,
+    "imagemUrl": "https://xcqsvcqjkogrchktrmgn.supabase.co/storage/v1/object/public/equipamentos/equipamentos/TI-0004.png"
+  },
+  {
+    "patrimonio": "TI-0005",
+    "nome": "Monitor 24 polegadas",
+    "categoria": "MONITOR",
+    "manutencao": false,
+    "imagemUrl": "https://xcqsvcqjkogrchktrmgn.supabase.co/storage/v1/object/public/equipamentos/equipamentos/TI-0005.png"
+  },
+  {
+    "patrimonio": "TI-0006",
+    "nome": "Monitor 27 polegadas",
+    "categoria": "MONITOR",
+    "manutencao": false,
+    "imagemUrl": "https://xcqsvcqjkogrchktrmgn.supabase.co/storage/v1/object/public/equipamentos/equipamentos/TI-0006.png"
+  },
+  {
+    "patrimonio": "TI-0007",
+    "nome": "Monitor 22 polegadas",
+    "categoria": "MONITOR",
+    "manutencao": true,
+    "imagemUrl": "https://xcqsvcqjkogrchktrmgn.supabase.co/storage/v1/object/public/equipamentos/equipamentos/TI-0007.png"
+  },
+  {
+    "patrimonio": "TI-0008",
+    "nome": "Cabo HDMI 2 m",
+    "categoria": "CABO",
+    "manutencao": false,
+    "imagemUrl": "https://xcqsvcqjkogrchktrmgn.supabase.co/storage/v1/object/public/equipamentos/equipamentos/TI-0008.png"
+  },
+  {
+    "patrimonio": "TI-0009",
+    "nome": "Cabo USB-C 1 m",
+    "categoria": "CABO",
+    "manutencao": false,
+    "imagemUrl": "https://xcqsvcqjkogrchktrmgn.supabase.co/storage/v1/object/public/equipamentos/equipamentos/TI-0009.png"
+  },
+  {
+    "patrimonio": "TI-0010",
+    "nome": "Cabo de rede 3 m",
+    "categoria": "CABO",
+    "manutencao": false,
+    "imagemUrl": "https://xcqsvcqjkogrchktrmgn.supabase.co/storage/v1/object/public/equipamentos/equipamentos/TI-0010.png"
+  },
+  {
+    "patrimonio": "TI-0011",
+    "nome": "Webcam Full HD",
+    "categoria": "CAMERA",
+    "manutencao": false,
+    "imagemUrl": "https://xcqsvcqjkogrchktrmgn.supabase.co/storage/v1/object/public/equipamentos/equipamentos/TI-0011.png"
+  },
+  {
+    "patrimonio": "TI-0012",
+    "nome": "Câmera compacta",
+    "categoria": "CAMERA",
+    "manutencao": false,
+    "imagemUrl": "https://xcqsvcqjkogrchktrmgn.supabase.co/storage/v1/object/public/equipamentos/equipamentos/TI-0012.png"
+  }
+]
