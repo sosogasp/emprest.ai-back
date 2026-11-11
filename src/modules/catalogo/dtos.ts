@@ -4,7 +4,7 @@ import { z } from 'zod/v3'
 export const pessoaSchema = z.object({ id: z.string().uuid(), nome: z.string(), iniciais: z.string() })
 export const emprestimoSchema = z.object({ id: z.string().uuid(), equipamentoId: z.string().uuid(), pessoaId: z.string().uuid(), retirada: z.string(), prazo: z.string(), pessoa: pessoaSchema })
 export const categoriaSchema = z.enum(['Notebook', 'Monitor', 'Cabo', 'Câmera', 'Acessório'])
-export const equipamentoSchema = z.object({ id: z.string().uuid(), nome: z.string(), categoria: categoriaSchema, patrimonio: z.string(), manutencao: z.boolean(), observacao: z.string().nullable(), emprestimo: emprestimoSchema.nullable() })
+export const equipamentoSchema = z.object({ id: z.string().uuid(), nome: z.string(), categoria: categoriaSchema, patrimonio: z.string(), manutencao: z.boolean(), observacao: z.string().nullable(), imagemUrl: z.string().url().nullable(), emprestimo: emprestimoSchema.nullable() })
 
 export class PerfilDto extends createZodDto(pessoaSchema.extend({ papel: z.enum(['Colaborador', 'Operações']) })) {}
 export class PaginaQuery extends createZodDto(z.object({ cursor: z.string().uuid().optional() })) {}

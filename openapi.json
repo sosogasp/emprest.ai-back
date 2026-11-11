@@ -289,6 +289,11 @@
                   "type": "string",
                   "nullable": true
                 },
+                "imagemUrl": {
+                  "type": "string",
+                  "format": "uri",
+                  "nullable": true
+                },
                 "emprestimo": {
                   "type": "object",
                   "properties": {
@@ -349,6 +354,7 @@
                 "patrimonio",
                 "manutencao",
                 "observacao",
+                "imagemUrl",
                 "emprestimo"
               ]
             }
@@ -498,6 +504,11 @@
             "type": "string",
             "nullable": true
           },
+          "imagemUrl": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
           "emprestimo": {
             "type": "object",
             "properties": {
@@ -558,6 +569,7 @@
           "patrimonio",
           "manutencao",
           "observacao",
+          "imagemUrl",
           "emprestimo"
         ]
       },

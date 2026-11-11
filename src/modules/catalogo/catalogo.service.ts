@@ -3,6 +3,7 @@ import { Contexto } from '../acesso/contexto'
 import { permissoes } from '../acesso/permissoes'
 import { CatalogoRepository, EstadoSolicitacao } from './catalogo.repository'
 import { CriarEquipamentoDto } from './dtos'
+import { somarDiasUteis } from './calendario'
 
 export function hoje() {
   return new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Sao_Paulo', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date())
@@ -31,8 +32,7 @@ export class CatalogoService {
   solicitar(equipamentoId: string) {
     if (!permissoes(this.contexto.atual()).can('create', 'Emprestimo')) throw new ForbiddenException()
     const retirada = new Date(`${hoje()}T00:00:00.000Z`)
-    const prazo = new Date(retirada)
-    prazo.setUTCDate(prazo.getUTCDate() + 14)
+    const prazo = somarDiasUteis(retirada, 14)
     return this.repository.solicitar(equipamentoId, retirada, prazo, (estado) => validarSolicitacao(estado, retirada))
   }
   devolver(id: string) { return this.repository.devolver(id) }

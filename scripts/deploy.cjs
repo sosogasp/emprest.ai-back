@@ -1,13 +1,7 @@
-// Usa somente as credenciais já presentes no ambiente da Vercel.
-require('ts-node/register')
+// Usa somente as credenciais jÃ¡ presentes no ambiente da Vercel.
 const { spawnSync } = require('node:child_process')
-const { configurarConexoes } = require('../src/conexao')
-configurarConexoes()
 const etapas = [
   ['node_modules/prisma/build/index.js', 'generate'],
-  ['node_modules/prisma/build/index.js', 'migrate', 'deploy'],
-  ['-r', 'ts-node/register', 'prisma/seed.ts'],
-  ['scripts/provisionar.cjs'],
   ['node_modules/@nestjs/cli/bin/nest.js', 'build'],
 ]
 for (const args of etapas) {

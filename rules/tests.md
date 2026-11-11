@@ -12,10 +12,7 @@ Sempre que você for criar ou mudar um arquivo de teste, e antes de dizer que um
 `CA-xx` está atendido. Vale para as duas pontas: componente no `frontend/` e
 rota no `backend/`.
 
-Nenhum runner existe hoje nos dois repositórios: `frontend/package.json` tem
-`dev`, `build`, `lint`, `typecheck` e `preview`, e a pasta `backend/` ainda não
-tem `package.json` (nem `src/`). Este arquivo diz o que fazer quando o runner
-existir e o que declarar enquanto não existe.
+Os runners atuais são Jest no backend e Vitest no frontend. Testcontainers executa as integrações com PostgreSQL real. Rode os testes existentes antes de declarar um critério atendido; as camadas adicionais continuam sujeitas à matriz e à aprovação de dependências.
 
 ## Procedimento
 1. A matriz é do ADR-001 §8 e não se escolhe outra: Jest no backend, Vitest no
@@ -25,12 +22,12 @@ existir e o que declarar enquanto não existe.
    tabela é assunto de ADR, não de conversa no chat.
 2. Dependência de teste é dependência nova — o runner, o ambiente de DOM e a
    biblioteca que renderiza e consulta o componente: nenhuma entra sem mostrar
-   antes e esperar (`rules/restrictions.md`). **Ponto não decidido:** o
-   ADR-001 §8 decide o runner (Vitest) e a Tarefa 9 da 002 diz `jsdom`, mas
-   quem renderiza o componente em teste e faz as consultas
-   (`@testing-library/react` é o padrão de mercado) não está em lugar nenhum.
-   Instalar isso é escolher biblioteca fora do ADR — proponha ao time junto com
-   o resto da Tarefa 9 e espere.
+   antes e esperar (`rules/restrictions.md`). O ADR-001 §8 decide o runner do
+   front (Vitest) e mais nada: quem renderiza o componente em teste e faz as
+   consultas não está em ADR nenhum, e biblioteca fora do ADR-001 o agente não
+   escolhe — "proponha e espere" (`rules/restrictions.md`, "Autoridade").
+   Sem decisão do time registrada em ADR, a Tarefa 9 da 002 não instala nada:
+   ela segue pendente por decisão em aberto, não por falta de runner.
 3. Prova-se com teste o `CA-xx` que só se observa com interação ou DOM:
    clique, foco, `createPortal`, toast, timer, CSS aplicado. O resto pode ser
    smoke de render — foi assim na 001 e na 002 —, porque o smoke não alcança
@@ -67,7 +64,9 @@ Um caso por CA, não um teste por tela. O passo 4 do `rules/checks.md` mostra o
 arquivo de teste novo no `git status --short`.
 
 ## Não faça
-- Não instale runner nem biblioteca de teste sem mostrar antes e esperar.
+- Não instale runner nem biblioteca de teste sem mostrar antes e esperar —
+  biblioteca de teste que não está em ADR nenhum só entra depois de o time
+  decidir e a decisão virar ADR (`rules/restrictions.md`).
 - Não rode teste contra o Postgres do Supabase remoto.
 - Não troque a matriz do ADR-001 §8 (Cypress, happy-dom, mock no lugar do
   Postgres real) sem ADR novo.

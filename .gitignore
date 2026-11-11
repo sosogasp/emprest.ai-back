@@ -1,1 +1,10 @@
+# Dependências e build
+node_modules/
+dist/
+coverage/
+
+# Ambiente
 .env
+
+# Temporários de verificação local
+_*.txt

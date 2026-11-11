@@ -24,7 +24,7 @@ function emprestimoDto(l: Loan) {
   return { id: l.id, equipamentoId: l.equipamentoId, pessoaId: l.usuarioId, retirada: l.retirada.toISOString().slice(0, 10), prazo: l.prazo.toISOString().slice(0, 10), pessoa: { id: l.usuario.id, nome: l.usuario.nome, iniciais: iniciais(l.usuario.nome) } }
 }
 function equipamentoDto(e: Item) {
-  return { id: e.id, nome: e.nome, categoria: ROTULOS[e.categoria], patrimonio: e.patrimonio, manutencao: e.manutencao, observacao: e.observacao, emprestimo: e.emprestimos[0] ? emprestimoDto(e.emprestimos[0]) : null }
+  return { id: e.id, nome: e.nome, categoria: ROTULOS[e.categoria], patrimonio: e.patrimonio, manutencao: e.manutencao, observacao: e.observacao, imagemUrl: e.imagemUrl ?? null, emprestimo: e.emprestimos[0] ? emprestimoDto(e.emprestimos[0]) : null }
 }
 
 @Injectable()
